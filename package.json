@@ -18,6 +18,7 @@
     "url": "https://github.com/codealchemist/youtube-audio-server/issues"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.15.2",
     "express-no-favicons": "0.0.1",
     "fluent-ffmpeg": "^2.1.2",

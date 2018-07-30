@@ -1,9 +1,10 @@
 #!/usr/bin/env node
+require('dotenv').config();
 const fs = require('fs')
 const path = require('path')
 const yas = require('./index')
 const args = require('minimist')(process.argv.slice(2))
-const port = process.env.PORT || 80
+const port = process.env.PORT || 80;
 
 // print ascii art
 var artFile = path.join(__dirname, './ascii-art.txt')

@@ -4,7 +4,7 @@ const YtNode = require('youtube-node')
 const through2 = require('through2')
 const Ffmpeg = require('fluent-ffmpeg')
 
-const apiKey = process.env.KEY
+const apiKey = process.env.YOUTUBE_API_KEY
 const ytNode = new YtNode()
 
 ytNode.setKey(apiKey)
