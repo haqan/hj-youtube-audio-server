@@ -44,7 +44,7 @@ function listen (port, callback = () => {}) {
     res.sendFile(file)
   })
 
-  app.get('/convert/:videoId', async (req, res) => {
+  app.get('/convert/:videoId', (req, res) => {
     const id = req.params.videoId;
 
     // Get info about file
