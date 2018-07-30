@@ -12,16 +12,11 @@
   "bin": {
     "yas": "./src/bin.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codealchemist/youtube-audio-server.git"
-  },
   "author": "Alberto Miranda",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codealchemist/youtube-audio-server/issues"
   },
-  "homepage": "https://github.com/codealchemist/youtube-audio-server#readme",
   "dependencies": {
     "express": "^4.15.2",
     "express-no-favicons": "0.0.1",

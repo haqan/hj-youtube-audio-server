@@ -6,6 +6,7 @@ const Ffmpeg = require('fluent-ffmpeg')
 
 const apiKey = process.env.KEY
 const ytNode = new YtNode()
+
 ytNode.setKey(apiKey)
 
 class YouTube {
@@ -65,7 +66,8 @@ class YouTube {
   }
 
   get (id, callback) {
-    ytNode.getById(id, callback)
+    ytNode.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
+    ytNode.getById(id, callback);
   }
 }
 
