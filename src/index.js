@@ -57,7 +57,7 @@ function listen (port, callback = () => {}) {
 
       const youtubeClipInfo = data.items[0].snippet;
       const mp3Name = youtubeClipInfo.title + '.mp3';
-      const file = __dirname.replace("src", "") + 'public/' + mp3Name;
+      const file = './public/' + mp3Name;
 
       const to = path.normalize(file);
       const writeOpts = { highWaterMark: 10000 * 1024 };
