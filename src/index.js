@@ -88,7 +88,7 @@ function listen (port, callback = () => {}) {
 
   app.get('/:videoId', (req, res) => {
     const videoId = req.params.videoId
-    const file = __dirname.replace("src", "") + 'public/' + id + '.mp3';
+    const file = __dirname.replace("src", "") + 'public/' + videoId + '.mp3';
 
     try {
       youtube.stream(videoId).pipe(res)
