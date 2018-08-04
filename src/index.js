@@ -7,6 +7,10 @@ const youtube = require('./youtube')
 const downloader = require('./downloader')
 const app = express()
 const fs = require('fs');
+const ytdl = require('ytdl-core');
+const sanitize = require('sanitize-filename');
+const ffmpeg = require('fluent-ffmpeg');
+
 
 function listen (port, callback = () => {}) {
   app.use(nofavicon())
@@ -44,6 +48,36 @@ function listen (port, callback = () => {}) {
     res.sendFile(file)
   })
 
+  app.get('/quick/:videoId', (req, res) => {
+    const id = req.params.videoId;
+    const stream = ytdl(id);
+
+    youtube.get(id, (err, data) => {
+      const youtubeClipInfo = data.items[0].snippet;
+      const mp3Name = sanitize(youtubeClipInfo.title) + '.mp3';
+      const file = './public/' + mp3Name;
+
+      const returnObject = {
+        file,
+        youtubeClipInfo: youtubeClipInfo
+      };
+
+      const proc = new ffmpeg({
+        source: stream
+      })
+      .on('error', function(err) {
+        console.log('An error occurred: ' + err.message);
+      })
+      .on('end', function() {
+        console.log('Conversion done');
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(returnObject));
+      })
+      .save(file);
+    });
+
+  });
+
   app.get('/convert/:videoId', (req, res) => {
     const id = req.params.videoId;
 
@@ -56,7 +90,7 @@ function listen (port, callback = () => {}) {
       }
 
       const youtubeClipInfo = data.items[0].snippet;
-      const mp3Name = youtubeClipInfo.title + '.mp3';
+      const mp3Name = sanitize(youtubeClipInfo.title) + '.mp3';
       const file = './public/' + mp3Name;
 
       const to = path.normalize(file);
@@ -68,11 +102,11 @@ function listen (port, callback = () => {}) {
         downloadPath: 'public/' + mp3Name,
         youtubeClipInfo: youtubeClipInfo
       };
-      ws.on('open', (chunk) => {
-        console.log('Starting conversion: ' + chunk);
+      ws.on('open', () => {
+        console.log('Starting conversion');
       });
       ws.on('finish', () => {
-        console.log('Conversion done ');
+        console.log('Conversion done');
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(returnObject));
       });

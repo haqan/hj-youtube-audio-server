@@ -50,7 +50,7 @@ function run () {
 
   // Start youtube-audio-server.
   yas.listen(port, () => {
-    console.log(` 🔈  YOUTUBE AUDIO SERVER listening on http://localhost:${port}!`)
+    console.log(` 🔈  YOUTUBE AUDIO SERVER JAOO listening on http://localhost:${port}!`)
     console.log('-'.repeat(80))
   })
 }
