@@ -66,7 +66,7 @@ class YouTube {
   }
 
   get (id, callback) {
-    ytNode.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
+    ytNode.setKey(apiKey);
     ytNode.getById(id, callback);
   }
 }
