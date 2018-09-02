@@ -69,6 +69,11 @@ class YouTube {
     ytNode.setKey(apiKey);
     ytNode.getById(id, callback);
   }
+
+  popular(callback) {
+    const categoryId = 10 // Music
+    ytNode.getMostPopularByCategory(5, categoryId, callback);
+  }
 }
 
 module.exports = new YouTube()
