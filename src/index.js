@@ -17,9 +17,12 @@ function listen (port, callback = () => {}) {
 
     // Add headers
   app.use(function (req, res, next) {
-
-      // Website you wish to allow to connect
-      res.setHeader('Access-Control-Allow-Origin', process.env.ACCESS_ORIGIN);
+      var origin = req.headers.origin;
+      var allowedOrigins = process.env.ACCESS_ORIGIN || 'http://localhost:3000';
+console.log(allowedOrigins);
+      if(allowedOrigins.indexOf(origin) > -1){
+          res.setHeader('Access-Control-Allow-Origin', origin);
+       }
 
       // Request methods you wish to allow
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
@@ -39,7 +42,7 @@ function listen (port, callback = () => {}) {
   app.use('/public/:videoId', function(req, res){
 
     const filename = __dirname.replace('src', '') + '/public/' + req.params.videoId;
-    res.setHeader('Content-type', 'audio/mpeg');
+    res.setHeader('Content-type', 'text/html');
     res.download(filename);
   });
 
